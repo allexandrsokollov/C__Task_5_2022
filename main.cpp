@@ -30,28 +30,30 @@ void printUser(User user) {
         << "Position is: " << user.Admin.position << endl
         << "Department: " << user.Admin.department << endl;
     }
-    cout << "User info atop -------------------------- User info atop" << endl;
+    cout << "User info atop -------------------------- User info atop" << endl << endl << endl;
 }
 
-User getNewUserFromConsole(bool Case) {
+User getNewUserFromConsole() {
     User newUser{};
-    newUser.Case = Case;
 
-    cout << "Enter name: ";
+    cout << "input 1 if user is admin end 2 if user is customer";
+    cin >> newUser.Case;
+
+    cout << "Enter name:   ";
     cin >> newUser.name;
 
-    if (!Case) {
-        cout << "Enter id: ";
+    if (!newUser.Case) {
+        cout << "Enter id:   " << endl;
         cin >> newUser.Admin.id;
 
-        cout << "Enter position: ";
+        cout << "Enter position:   " << endl;
         cin >> newUser.Admin.position;
 
-        cout << "Enter department: ";
+        cout << "Enter department:   " << endl;
         cin >> newUser.Admin.department;
     } else {
 
-        cout << "Enter customer ID: ";
+        cout << "Enter customer ID:   " << endl;
         cin >> newUser.Customer.customerID;
     }
 
@@ -68,6 +70,57 @@ int main() {
         DB[i] = temp;
     }
 
-    cout << admn.name;
-    return 0;
+    while (true) {
+        int action;
+        cout << "DataBase actions:           (input appropriate number)" << endl
+             << "( 1 )  Get user info via array index" << endl
+             << "( 2 )  Get all info" << endl
+             << "( 3 )  Add User" << endl
+             << "( 4 )  Delete user via array index" << endl
+             << "( 5 )  End session" << endl;
+        cin >> action;
+        cout << endl;
+
+        switch (action) {
+            case 1: {
+                cout << "Input index number from 0 to 29:" << endl;
+                int index;
+                cin >> index;
+
+                printUser(DB[index]);
+                break;
+            }
+            case 2: {
+                for (int i = 0; i < 30; i++) {
+                    printUser(DB[i]);
+                }
+                break;
+            }
+            case 3: {
+                int index;
+                cout << "input position to put new user in from 0 to 29:" << endl;
+                cin >> index;
+
+                User newUsr = getNewUserFromConsole();
+
+                DB[index] = newUsr;
+                break;
+            }
+            case 4: {
+                int index;
+                cout << "input position to delete user from 0 to 29:" << endl;
+                cin >> index;
+
+                DB[index] = temp;
+                break;
+            }
+            case 5: {
+                return 0;
+            }
+            default: {
+                cout << "Wrong number! Try one more time" << endl;
+                break;
+            }
+        }
+    }
 }
