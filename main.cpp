@@ -36,7 +36,7 @@ void printUser(User user) {
 User getNewUserFromConsole() {
     User newUser{};
 
-    cout << "input 1 if user is admin end 2 if user is customer";
+    cout << "input 0 if user is admin end 1 if user is customer";
     cin >> newUser.Case;
 
     cout << "Enter name:   ";
